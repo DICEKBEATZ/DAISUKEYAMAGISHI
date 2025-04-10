@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAISUKE YAMAGISHI - 動画編集ポートフォリオ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== 基本設定 ===== */
+        :root {
+            --accent-color: #000;
+            --text-color: #000;
+            --background-color: #fff;
+            --dark-bg: #000;
+            --light-gray: #f9f9f9;
+            --medium-gray: #777;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 300;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            border: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+        
+        .btn:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-color);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ===== ヘッダー ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--text-color);
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+        
+        .nav-menu a {
+            color: var(--text-color);
+            font-weight: 300;
+            position: relative;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-color);
+            bottom: -3px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        /* ===== ヒーローセクション ===== */
+        #hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 1;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+            opacity: 0.85;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding-left: 5%;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.2;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        /* ===== ポートフォリオセクション ===== */
+        #portfolio {
+            background-color: var(--light-gray);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9のアスペクト比 */
+            overflow: hidden;
+            border-radius: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .portfolio-item iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .portfolio-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .portfolio-item:hover .portfolio-info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .portfolio-info h3 {
+            font-size: 1rem;
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+        
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 3rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+            cursor: pointer;
+        }
+        
+        .portfolio-item:hover .play-btn {
+            opacity: 1;
+        }
+
+        /* モーダルウィンドウ */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            width: 80%;
+            max-width: 1000px;
+            position: relative;
+        }
+        
+        .modal-content iframe {
+            width: 100%;
+            height: 56.25vw;
+            max-height: 562.5px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== サービスセクション ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .service-card:hover {
+            border-bottom: 2px solid var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+        
+        .service-card p {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* ===== プロフィールセクション ===== */
+        #profile {
+            background-color: var(--light-gray);
+        }
+        
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        .profile-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-weight: 400;
+        }
+        
+        .profile-content p {
+            margin-bottom: 1.5rem;
+            color: var(--medium-gray);
+            font-weight: 300;
+        }
+        
+        .company-info {
+            margin-top: 2rem;
+        }
+        
+        .company-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: 400;
+        }
+        
+        .company-info ul {
+            list-style: none;
+        }
+        
+        .company-info li {
+            margin-bottom: 0.5rem;
+            color: var(--medium-gray);
+            font-weight: 300;
+        }
+        
+        .skills-container {
+            margin-top: 2rem;
+        }
+        
+        .skills-container h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-weight: 400;
+        }
+        
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .skill-item {
+            background-color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            text-align: center;
+            color: var(--medium-gray);
+            font-weight: 300;
+        }
+
+        /* ===== お問い合わせセクション ===== */
+        #contact {
+            text-align: center;
+        }
+        
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+            color: var(--medium-gray);
+            font-weight: 300;
+        }
+        
+        .contact-details {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-right: 1rem;
+        }
+        
+        .contact-text {
+            font-size: 1rem;
+            color: var(--medium-gray);
+            font-weight: 300;
+        }
+        
+        .contact-text a {
+            color: var(--text-color);
+        }
+        
+        .contact-text a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ===== フッター ===== */
+        footer {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: white;
+            letter-spacing: 1px;
+        }
+        
+        .footer-logo span {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .footer-nav {
+            display: flex;
+            list-style: none;
+        }
+        
+        .footer-nav li {
+            margin-left: 1.5rem;
+        }
+        
+        .footer-nav a {
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .footer-nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+        }
+
+        /* ===== レスポンシブデザイン ===== */
+        @media screen and (max-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .skills-list {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.5s ease;
+                z-index: 1000;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 1.5rem 0;
+            }
+            
+            .hamburger {
+                display: block;
+                z-index: 1001;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-nav {
+                margin-top: 1.5rem;
+                justify-content: center;
+            }
+            
+            .footer-nav li:first-child {
+                margin-left: 0;
+            }
+            
+            .skills-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .skills-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">DAISUKE <span>YAMAGISHI</span></a>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#hero">HOME</a></li>
+                <li><a href="#portfolio">WORKS</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#profile">PROFILE</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section id="hero">
+        <div class="hero-overlay"></div>
+        <iframe class="hero-video" src="https://www.youtube.com/embed/CMRBPqbn6do?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=CMRBPqbn6do&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="hero-content">
+            <h1 style="font-weight: 300; line-height: 1; text-transform: uppercase; position: relative;">
+                <span style="display: block; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 0.5rem; font-weight: 300; opacity: 0.8;">BRINGING</span>
+                <span style="display: block; font-size: 6rem; letter-spacing: -2px; margin-bottom: 0.5rem;">VISION</span>
+                <span style="display: block; font-size: 1.2rem; letter-spacing: 3px; font-weight: 300; opacity: 0.8; text-align: right;">TO LIFE</span>
+                <span style="position: absolute; top: 50%; left: 0; width: 30%; height: 2px; background-color: #fff;"></span>
+            </h1>
+            <p>クリエイティブな視点と確かな技術で、心に響く映像を制作します。企画から編集、納品まで一貫してサポート。</p>
+            <a href="#contact" class="btn">お問い合わせ</a>
+        </div>
+    </section>
+
+    <!-- ポートフォリオセクション -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>WORKS</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-video="https://www.youtube.com/embed/_OVrNo20g8o">
+                    <iframe src="https://www.youtube.com/embed/_OVrNo20g8o?mute=1&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="portfolio-info">
+                        <h3>iCure 社員着動画</h3>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-video="https://www.youtube.com/embed/pOHrazH6t4U">
+                    <iframe src="https://www.youtube.com/embed/pOHrazH6t4U?mute=1&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="portfolio-info">
+                        <h3>iCure 社員座談会</h3>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-video="https://www.youtube.com/embed/J72e1hh7kxo">
+                    <iframe src="https://www.youtube.com/embed/J72e1hh7kxo?mute=1&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="portfolio-info">
+                        <h3>iCure 社長副社長対談</h3>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-video="https://www.youtube.com/embed/7io91pxrP50">
+                    <iframe src="https://www.youtube.com/embed/7io91pxrP50?mute=1&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="portfolio-info">
+                        <h3>日本生命TEAM NACS トーク</h3>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-video="https://www.youtube.com/embed/-aqCrYo1QKo">
+                    <iframe src="https://www.youtube.com/embed/-aqCrYo1QKo?mute=1&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="portfolio-info">
+                        <h3>IIJインターネットとつくる未来「マグロの温度管理」編</h3>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-video="https://www.youtube.com/embed/bCklcPg8QTw">
+                    <iframe src="https://www.youtube.com/embed/bCklcPg8QTw?mute=1&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="portfolio-info">
+                        <h3>IIJ 30周年記念 社員インタビュー</h3>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-video="https://www.youtube.com/embed/ydBmnnKppCU">
+                    <iframe src="https://www.youtube.com/embed/ydBmnnKppCU?mute=1&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="portfolio-info">
+                        <h3>DEMI ELEVATE スキンケア・ワークアウト</h3>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-video="https://www.youtube.com/embed/yf_h0zMug1A">
+                    <iframe src="https://www.youtube.com/embed/yf_h0zMug1A?mute=1&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="portfolio-info">
+                        <h3>DEMI ELEVATE ボディミスト</h3>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-video="https://www.youtube.com/embed/Kgz9-3cWU-g">
+                    <iframe src="https://www.youtube.com/embed/Kgz9-3cWU-g?mute=1&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="portfolio-info">
+                        <h3>DEMI ELEVATE スキャルプケア・ワークアウト</h3>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- モーダルウィンドウ -->
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <iframe frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- サービスセクション -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>SERVICES</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>撮影</h3>
+                    <p>4K対応カメラとプロ仕様の照明・音響機材を使用し、高品質な映像素材の撮影を提供。インタビュー、イベント、商品PRなど様々なシーンに対応します。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>動画編集</h3>
+                    <p>カット、テロップ、BGM、効果音、カラーグレーディングなど、映像の魅力を最大限に引き出す編集を行います。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3>企画・構成</h3>
+                    <p>目的やターゲットに合わせた映像の企画立案、ストーリー構成、絵コンテ作成などをサポートします。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>モーショングラフィックス</h3>
+                    <p>タイトルアニメーションやインフォグラフィックなど、視覚的に訴えるモーショングラフィックスを制作します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- プロフィールセクション -->
+    <section id="profile">
+        <div class="container">
+            <div class="section-title">
+                <h2>PROFILE</h2>
+            </div>
+            <div class="profile-container">
+                <div class="profile-content">
+                    <h3>DAISUKE YAMAGISHI</h3>
+                    <p>お客様の伝えたい想いを映像の力で形にするクリエイターです。企業VP、プロモーションビデオ、Web動画、SNS広告動画など、多岐にわたるジャンルの映像制作を手掛けています。常に最新のトレンドと技術を取り入れ、高品質な映像を提供することをお約束します。</p>
+                    
+                    <div class="company-info">
+                        <h4>COMPANY INFORMATION</h4>
+                        <ul>
+                            <li><strong>社名:</strong> 株式会社ヤマダイ</li>
+                            <li><strong>住所:</strong> 〒152-0012 東京都目黒区洗足1-26-1-202</li>
+                            <li><strong>設立:</strong> 2015年</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skills-container">
+                        <h4>SKILLS</h4>
+                        <div class="skills-list">
+                            <div class="skill-item">Adobe Premiere Pro</div>
+                            <div class="skill-item">After Effects</div>
+                            <div class="skill-item">Final Cut Pro</div>
+                            <div class="skill-item">DaVinci Resolve</div>
+                            <div class="skill-item">モーショングラフィックス</div>
+                            <div class="skill-item">ドローン空撮編集</div>
+                            <div class="skill-item">丁寧なコミュニケーション</div>
+                            <div class="skill-item">確かなヒアリング力</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせセクション -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>CONTACT</h2>
+            </div>
+            <div class="contact-info">
+                <p>映像制作に関するご相談、お見積もり依頼など、お気軽にお問い合わせください。<br>メールまたはSNSでのご連絡をお待ちしております。</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            〒152-0012 東京都目黒区洗足1-26-1-202
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <a href="mailto:yamagishi@yamadai-img.co.jp">yamagishi@yamadai-img.co.jp</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="mailto:yamagishi@yamadai-img.co.jp" class="btn">contact me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <a href="#" class="footer-logo">DAISUKE <span>YAMAGISHI</span></a>
+                <ul class="footer-nav">
+                    <li><a href="#hero">HOME</a></li>
+                    <li><a href="#portfolio">WORKS</a></li>
+                    <li><a href="#services">SERVICES</a></li>
+                    <li><a href="#profile">PROFILE</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                &copy; 2025 DAISUKE YAMAGISHI. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ハンバーガーメニュー
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // ナビゲーションリンクのスムーススクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (document.querySelector('.nav-menu').classList.contains('active')) {
+                    document.querySelector('.nav-menu').classList.remove('active');
+                    document.querySelector('.hamburger i').classList.add('fa-bars');
+                    document.querySelector('.hamburger i').classList.remove('fa-times');
+                }
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // ポートフォリオアイテムのモーダル表示
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        const modal = document.querySelector('.modal');
+        const modalIframe = document.querySelector('.modal iframe');
+        const closeModal = document.querySelector('.close-modal');
+        
+        portfolioItems.forEach(item => {
+            const playBtn = item.querySelector('.play-btn');
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); // バブリングを停止
+                const videoUrl = item.getAttribute('data-video');
+                modalIframe.src = `${videoUrl}?autoplay=1`;
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // iframeクリックイベントの伝播を停止
+            const iframe = item.querySelector('iframe');
+            iframe.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+        
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+            modalIframe.src = '';
+            document.body.style.overflow = 'auto';
+        });
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                modalIframe.src = '';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // ヘッダーのスクロール時背景変更
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '1rem 0';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '1.5rem 0';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+            }
+        });
+    </script>
+</body>
+</html>
